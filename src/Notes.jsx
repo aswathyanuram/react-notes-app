@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Button, Card, Input } from "antd";
+import { Button, Card, Input, Popconfirm } from "antd";
 import { notesContext } from "./NotesProvider";
 import { DeleteFilled } from "@ant-design/icons";
 import axios from "axios";
@@ -56,12 +56,18 @@ export default function Notes() {
               size="small"
             >
               {note.note}
-              <DeleteFilled
-                style={{ marginLeft: "10rem" }}
-                onClick={() => {
+              <Popconfirm
+                title="Delete the task"
+                description="Are you sure to delete this task?"
+                onConfirm={() => {
                   deleteNote(note.id);
                 }}
-              />
+                onCancel={() => {}}
+                okText="Yes"
+                cancelText="No"
+              >
+                <DeleteFilled style={{ marginLeft: "10rem" }} />
+              </Popconfirm>
             </Card>
           );
         })}
